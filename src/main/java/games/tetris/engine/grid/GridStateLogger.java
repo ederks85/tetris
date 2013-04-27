@@ -1,4 +1,7 @@
-package games.util.grid;
+package games.tetris.engine.grid;
+
+import games.util.grid.GridOutOfBoundsException;
+import games.util.grid.Virtual2DGrid;
 
 import org.apache.commons.lang.Validate;
 
@@ -10,7 +13,7 @@ import org.apache.commons.lang.Validate;
  */
 class GridStateLogger<T> {
 
-	private final Virtual2DGrid<T> grid;
+	private final Virtual2DGrid<T> grid; //TODO Remove when no longer necessary
 
 	public GridStateLogger(Virtual2DGrid<T> grid) {
 		Validate.notNull(grid, "Grid is null");
@@ -18,13 +21,11 @@ class GridStateLogger<T> {
 	}
 
 	public void logGridState() {
-		//TODO Configure to log to other sources
-
 		System.out.print("Start Logging Grid State:" + System.getProperty("line.separator"));
 		for (int i=0; i < this.grid.getGridDimensions().height; i++) {
 			for (int j=0; j < this.grid.getGridDimensions().width; j++) {
 				try {
-					System.out.print(" " + (this.grid.getObjectAtPosition(j, i) == Boolean.FALSE ? "0" : "1"));
+					System.out.print(" " + (this.grid.getObjectAtPosition(j, i) == (Boolean.TRUE) ? "1" : "0"));
 				} catch (GridOutOfBoundsException e) {
 					e.printStackTrace();
 				}

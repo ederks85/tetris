@@ -1,11 +1,11 @@
+import games.tetris.engine.grid.ThreadSafeVirtual2DBooleanGrid;
 import games.util.grid.GridOutOfBoundsException;
-import games.util.grid.ThreadSafeVirtual2DGrid;
 
 public class Test {
 
 	public static void main(String[] args) throws GridOutOfBoundsException {
 
-		ThreadSafeVirtual2DGrid grid = new ThreadSafeVirtual2DGrid(3, 6);
+		ThreadSafeVirtual2DBooleanGrid grid = new ThreadSafeVirtual2DBooleanGrid(3, 6);
 
 		System.out.println("Initial grid size: " + grid.getGridDimensions());
 
