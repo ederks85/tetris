@@ -1,6 +1,12 @@
 import games.tetris.engine.grid.ThreadSafeVirtual2DBooleanGrid;
 import games.util.grid.GridOutOfBoundsException;
 
+/**
+ * EGIT test
+ * 
+ * @author edwin
+ *
+ */
 public class Test {
 
 	public static void main(String[] args) throws GridOutOfBoundsException {

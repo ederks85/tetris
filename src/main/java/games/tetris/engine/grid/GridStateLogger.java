@@ -8,6 +8,8 @@ import org.apache.commons.lang.Validate;
 /**
  * Class that logs the state of a grid to a file. The log will show '0' where grid locations are emtpy and '1' where grid locations are filled with an object.
  * 
+ * Comment line for EGIT test
+ * 
  * @author edwin
  *
  */
