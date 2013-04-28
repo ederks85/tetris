@@ -37,8 +37,10 @@ public class TetrisGridController implements GridController {
 		if (occupied) {
 			throw new GridFieldOccupiedException("Grid field (x=" + moveCommand.getNewLocation().getX() + ",y=" + moveCommand.getNewLocation().getY() + ") is already occupied");
 		} else {
-			this.grid.setObjectAtPosition(Boolean.FALSE, moveCommand.getCurrentLocation().getX(), moveCommand.getCurrentLocation().getY());
+			// First perform the actual move
 			this.grid.setObjectAtPosition(Boolean.TRUE, moveCommand.getNewLocation().getX(), moveCommand.getNewLocation().getY());
+			// If the grid hasn't complained about the move, the move was succesful and we can clear the old location
+			this.grid.setObjectAtPosition(Boolean.FALSE, moveCommand.getCurrentLocation().getX(), moveCommand.getCurrentLocation().getY());
 		}
 	}
 }
