@@ -28,7 +28,7 @@ public abstract class AbstractVirtual2DGrid<T> implements Virtual2DGrid<T> {
 			throw new GridOutOfBoundsException("Position " + x + " exceeds grid width of " + getGridDimensions().width);
 		}
 		if (y < 0 || y >= getGridDimensions().height) {
-			throw new GridOutOfBoundsException("Position " + x + " exceeds grid height of " + getGridDimensions().height);
+			throw new GridOutOfBoundsException("Position " + y + " exceeds grid height of " + getGridDimensions().height);
 		}
 	}
 }

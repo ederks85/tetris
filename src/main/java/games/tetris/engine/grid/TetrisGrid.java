@@ -9,13 +9,13 @@ import games.util.grid.GridOutOfBoundsException;
  * @author edwin
  *
  */
-public class Virtual2DBooleanGrid extends AbstractVirtual2DGrid<Boolean> {
+public class TetrisGrid extends AbstractVirtual2DGrid<Boolean> {
 
 	private final Boolean[][] grid;
 
 	private final GridStateLogger<Boolean> gridLogger;
 
-	public Virtual2DBooleanGrid(int width, int height) {
+	public TetrisGrid(int width, int height) {
 		super(width, height);
 		this.grid = new Boolean[width][height];
 		this.gridLogger = new GridStateLogger<>(this);
