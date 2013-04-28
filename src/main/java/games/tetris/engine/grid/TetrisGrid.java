@@ -39,6 +39,7 @@ public class TetrisGrid extends AbstractVirtual2DGrid<Boolean> {
 	public void setObjectAtPosition(Boolean object, int x, int y) throws GridOutOfBoundsException {
 		checkPosition(x, y);
 		this.grid[x][y] = object;
+
 		this.gridLogger.logGridState();
 	}
 }
