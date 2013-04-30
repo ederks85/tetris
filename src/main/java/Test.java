@@ -1,7 +1,7 @@
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import games.tetris.engine.TetrisEngine;
+import games.tetris.engine.TetrisCommandProcessor;
 import games.util.command.generic.MoveCommand;
 import games.util.command.generic.ThreadSafeMoveCommand;
 import games.util.grid.GridFieldOccupiedException;
@@ -26,7 +26,7 @@ public class Test {
 		MoveCommand<Object> com8 = new ThreadSafeMoveCommand<Object>(new Object(), new Point2D(5,6), new Point2D(5,7));
 		MoveCommand<Object> com9 = new ThreadSafeMoveCommand<Object>(new Object(), new Point2D(5,7), new Point2D(5,8));
 
-		TetrisEngine g = new TetrisEngine();
+		TetrisCommandProcessor g = new TetrisCommandProcessor();
 		Future<MoveCommand<Object>> a1 = g.performMoveAction(com1);
 		a1.get();
 		Future<MoveCommand<Object>> a2 = g.performMoveAction(com2);

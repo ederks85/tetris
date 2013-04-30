@@ -11,18 +11,18 @@ import java.util.concurrent.Future;
 import org.apache.commons.lang.Validate;
 
 /**
- * Class that represents the Tetris Engine. Via this class, different threads can ask the enigne to perform commands and block on them until the engine has finished them.
+ * Class that represents the command executor part of the Tetris Engine. Via this class, different threads can request to perform commands and block on them until the executor has finished them.
  * 
  * @author edwin
  *
  */
-public class TetrisEngine {
+public class TetrisCommandProcessor {
 
-	private final ExecutorService engine;
+	private final ExecutorService processor;
 	private final GridController gridController;
 
-	public TetrisEngine() {
-		this.engine = Executors.newSingleThreadExecutor();
+	public TetrisCommandProcessor() {
+		this.processor = Executors.newSingleThreadExecutor();
 		this.gridController = new TetrisGridController();
 	}
 
@@ -30,13 +30,13 @@ public class TetrisEngine {
 		Validate.notNull(moveCommand, "Move Command is null.");
 
 		MoveTask moveTask = new MoveTask(this.gridController, moveCommand);
-		return this.engine.submit(moveTask);
+		return this.processor.submit(moveTask);
 	}
 
 	/**
-	 * Method to be called when the engine needs to be stopped, for example when the program ends. This method will clean all resources and memory.
+	 * Method to be called when the processor needs to be stopped, for example when the program ends. This method will clean all resources and memory.
 	 */
 	public void shutdown() {
-		this.engine.shutdown();
+		this.processor.shutdown();
 	}
 }
