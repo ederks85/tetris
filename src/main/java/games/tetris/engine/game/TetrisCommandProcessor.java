@@ -1,6 +1,7 @@
-package games.tetris.engine;
+package games.tetris.engine.game;
 
 import games.tetris.engine.grid.TetrisGridController;
+import games.tetris.engine.object.TetrisObject;
 import games.util.command.generic.MoveCommand;
 import games.util.grid.GridController;
 
@@ -16,7 +17,7 @@ import org.apache.commons.lang.Validate;
  * @author edwin
  *
  */
-public class TetrisCommandProcessor {
+public class TetrisCommandProcessor { //TODO maybe make interface of this, more clean though initially it seemed over-designed
 
 	private final ExecutorService processor;
 	private final GridController gridController;
@@ -26,7 +27,7 @@ public class TetrisCommandProcessor {
 		this.gridController = new TetrisGridController();
 	}
 
-	public Future<MoveCommand<Object>> performMoveAction(final MoveCommand<Object> moveCommand) { //TODO In later version, switch Object to some sort of Tetris object
+	public Future<MoveCommand<TetrisObject>> performMoveAction(final MoveCommand<TetrisObject> moveCommand) { //TODO In later version, switch Object to some sort of Tetris object
 		Validate.notNull(moveCommand, "Move Command is null.");
 
 		MoveTask moveTask = new MoveTask(this.gridController, moveCommand);
@@ -34,9 +35,10 @@ public class TetrisCommandProcessor {
 	}
 
 	/**
-	 * Method to be called when the processor needs to be stopped, for example when the program ends. This method will clean all resources and memory.
+	 * Method to be called when the processor needs to be stopped, for example when the program ends. This method will clean all resources and memory. Should not 
+	 * be called and even be available to only the component that manages the insance of this class.
 	 */
-	public void shutdown() {
+	void shutdown() {
 		this.processor.shutdown();
 	}
 }

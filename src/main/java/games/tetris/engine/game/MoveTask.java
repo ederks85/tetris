@@ -1,5 +1,6 @@
-package games.tetris.engine;
+package games.tetris.engine.game;
 
+import games.tetris.engine.object.TetrisObject;
 import games.util.command.generic.MoveCommand;
 import games.util.grid.GridController;
 
@@ -13,10 +14,10 @@ import org.apache.commons.lang.Validate;
  * @author edwin
  *
  */
-public class MoveTask implements Callable<MoveCommand<Object>> {
+public class MoveTask implements Callable<MoveCommand<TetrisObject>> {
 
 	private final GridController gridController;
-	private final MoveCommand<Object> moveCommand;
+	private final MoveCommand<TetrisObject> moveCommand;
 
 	/**
 	 * Provide the task with the necessary resources to perform a move task on a grid via a controller.
@@ -24,7 +25,7 @@ public class MoveTask implements Callable<MoveCommand<Object>> {
 	 * @param gridController	the grid controller that will perform the 
 	 * @param moveCommand		the details of the move
 	 */
-	public MoveTask(GridController gridController, MoveCommand<Object> moveCommand) {
+	public MoveTask(GridController gridController, MoveCommand<TetrisObject> moveCommand) {
 		Validate.notNull(gridController, "Grid controller is null");
 		Validate.notNull(moveCommand, "Move command is null");
 
@@ -33,7 +34,7 @@ public class MoveTask implements Callable<MoveCommand<Object>> {
 	}
 
 	@Override
-	public MoveCommand<Object> call() throws Exception {
+	public MoveCommand<TetrisObject> call() throws Exception {
 		this.gridController.moveObject(this.moveCommand);
 		return this.moveCommand;
 	}
