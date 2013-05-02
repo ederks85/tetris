@@ -14,6 +14,10 @@ public abstract class AbstractTetrisGameSubscriber implements TetrisGameSubscrib
 	private AtomicReference<TetrisGameState> tetrisGameState;
 	private AtomicReference<TetrisCommandProcessor> tetrisCommandProcessor;
 
+	public AbstractTetrisGameSubscriber() {
+		this.tetrisGameState = new AtomicReference<>();
+		this.tetrisCommandProcessor = new AtomicReference<>();
+	}
 	/**
 	 * Method that is to be called when subclass subscribes or unsubscribes to the Tetris Game.
 	 * 

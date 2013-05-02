@@ -31,23 +31,18 @@ public class TetrisGridController implements GridController {
 	public synchronized <T> void moveObject(MoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
 		Validate.notNull(moveCommand, "Move Command is null");
 		Validate.notNull(moveCommand.getNewLocation(), "Move Command's new location is null");
-		System.out.println("1");
 		Boolean occupied = this.grid.getObjectAtPosition(moveCommand.getNewLocation().getX(), moveCommand.getNewLocation().getY());
-		System.out.println("2");
 
 		if (occupied) {
-			System.out.println("3");
-
 			throw new GridFieldOccupiedException("Grid field (x=" + moveCommand.getNewLocation().getX() + ",y=" + moveCommand.getNewLocation().getY() + ") is already occupied");
 		} else {
-			System.out.println("4");
-
 			// First perform the actual move
 			this.grid.setObjectAtPosition(Boolean.TRUE, moveCommand.getNewLocation().getX(), moveCommand.getNewLocation().getY());
-			System.out.println("5");
 
-			// If the grid hasn't complained about the move, the move was succesful and we can clear the old location
-			this.grid.setObjectAtPosition(Boolean.FALSE, moveCommand.getCurrentLocation().getX(), moveCommand.getCurrentLocation().getY());
+			// If the grid hasn't complained about the move, the move was successful and we can clear the old location if the object was already present
+			if (moveCommand.getCurrentLocation() != null) {
+				this.grid.setObjectAtPosition(Boolean.FALSE, moveCommand.getCurrentLocation().getX(), moveCommand.getCurrentLocation().getY());
+			}
 		}
 	}
 }

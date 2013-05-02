@@ -23,4 +23,9 @@ public class Point2D {
 	public int getY() {
 		return this.y;
 	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + ": x=" + this.x + ",y=" + this.y;
+	}
 }

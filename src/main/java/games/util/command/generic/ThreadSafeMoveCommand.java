@@ -1,6 +1,8 @@
 package games.util.command.generic;
 
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import games.util.grid.Point2D;
 
 import org.apache.commons.lang.Validate;
@@ -15,28 +17,30 @@ public class ThreadSafeMoveCommand<T> implements MoveCommand<T> {
 
 	private final T object;
 
-	private final Point2D currentLocation;
-	private Point2D newLocation;
+	private final AtomicReference<Point2D> currentLocation;
+	private final AtomicReference<Point2D> newLocation;
+
 
 	public ThreadSafeMoveCommand(final T object, final Point2D currentLocation, final Point2D newLocation) {
-		this(object, currentLocation);
-		Validate.notNull(newLocation, "New location is null");
+		Validate.notNull(object, "Object is null");
 
-		this.newLocation = newLocation;
+		this.object = object;
+		this.currentLocation = new AtomicReference<>(currentLocation);
+		this.newLocation = new AtomicReference<>(newLocation);
 	}
 
 	/**
 	 * Create a move command for an object where the new location is yet unknown.
-	 * 
-	 * @param object
-	 * @param currentLocation
 	 */
 	public ThreadSafeMoveCommand(final T object, final Point2D currentLocation) {
-		Validate.notNull(object, "Object is null");
-		Validate.notNull(currentLocation, "Current location is null");
+		this(object, currentLocation, null);
+	}
 
-		this.object = object;
-		this.currentLocation = currentLocation;
+	/**
+	 * Create a move command for an object where the current and new location are yet unknown.
+	 */
+	public ThreadSafeMoveCommand(final T object) {
+		this(object, null, null);
 	}
 
 	@Override
@@ -46,16 +50,16 @@ public class ThreadSafeMoveCommand<T> implements MoveCommand<T> {
 
 	@Override
 	public Point2D getCurrentLocation() {
-		return this.currentLocation;
+		return this.currentLocation.get();
 	}
 
 	@Override
-	public synchronized void setNewLocation(Point2D newLocation) {
-		this.newLocation = newLocation;
+	public void setNewLocation(Point2D newLocation) {
+		this.newLocation.set(newLocation);
 	}
 
 	@Override
-	public synchronized Point2D getNewLocation() {
-		return this.newLocation;
+	public Point2D getNewLocation() {
+		return this.newLocation.get();
 	}
 }

@@ -13,12 +13,9 @@ public class TetrisGrid extends AbstractVirtual2DGrid<Boolean> {
 
 	private final Boolean[][] grid;
 
-	private final GridStateLogger<Boolean> gridLogger;
-
 	public TetrisGrid(int width, int height) {
 		super(width, height);
 		this.grid = new Boolean[width][height];
-		this.gridLogger = new GridStateLogger<>(this);
 	}
 
 	/**
@@ -39,7 +36,5 @@ public class TetrisGrid extends AbstractVirtual2DGrid<Boolean> {
 	public void setObjectAtPosition(Boolean object, int x, int y) throws GridOutOfBoundsException {
 		checkPosition(x, y);
 		this.grid[x][y] = object;
-
-		this.gridLogger.logGridState();
 	}
 }

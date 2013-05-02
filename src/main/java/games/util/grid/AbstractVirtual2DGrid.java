@@ -26,11 +26,11 @@ public abstract class AbstractVirtual2DGrid<T> implements Virtual2DGrid<T> {
 	protected void checkPosition(int x, int y) throws GridOutOfBoundsException {
 		if (x < 0 || x >= getGridDimensions().width) {
 			System.out.println("Position " + x + " exceeds grid width of " + getGridDimensions().width);
-			throw new GridOutOfBoundsException("Position " + x + " exceeds grid width of " + getGridDimensions().width);
+			throw new GridOutOfBoundsException("Position " + x + " exceeds grid width between 0 and " +  getGridDimensions().width);
 		}
 		if (y < 0 || y >= getGridDimensions().height) {
 			System.out.println("Position " + y + " exceeds grid height of " + getGridDimensions().height);
-			throw new GridOutOfBoundsException("Position " + y + " exceeds grid height of " + getGridDimensions().height);
+			throw new GridOutOfBoundsException("Position " + y + " exceeds grid height between 0 and " + getGridDimensions().height);
 		}
 	}
 }
