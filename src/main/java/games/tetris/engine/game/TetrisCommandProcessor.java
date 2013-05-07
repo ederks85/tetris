@@ -2,7 +2,7 @@ package games.tetris.engine.game;
 
 import games.tetris.engine.grid.TetrisGridController;
 import games.tetris.engine.object.TetrisObject;
-import games.util.command.generic.MoveCommand;
+import games.util.command.generic.MultiLocationMoveCommand;
 import games.util.grid.GridController;
 
 import java.util.concurrent.ExecutorService;
@@ -27,7 +27,7 @@ public class TetrisCommandProcessor { //TODO maybe make interface of this, more 
 		this.gridController = new TetrisGridController();
 	}
 
-	public Future<MoveCommand<TetrisObject>> performMoveAction(final MoveCommand<TetrisObject> moveCommand) { //TODO In later version, switch Object to some sort of Tetris object
+	public Future<MultiLocationMoveCommand<TetrisObject>> performMoveAction(final MultiLocationMoveCommand<TetrisObject> moveCommand) { //TODO In later version, switch Object to some sort of Tetris object
 		Validate.notNull(moveCommand, "Move Command is null.");
 
 		MoveTask moveTask = new MoveTask(this.gridController, moveCommand);

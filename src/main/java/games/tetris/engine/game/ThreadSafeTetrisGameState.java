@@ -14,11 +14,11 @@ import games.util.grid.Point2D;
 public class ThreadSafeTetrisGameState implements TetrisGameState {
 
 	private final AtomicReference<TetrisObject> currentTetrisObject;
-	private final AtomicReference<Point2D> currentTetrisObjectLocation;
+	private final AtomicReference<Point2D[]> currentTetrisObjectLocations;
 
 	public ThreadSafeTetrisGameState() {
 		this.currentTetrisObject = new AtomicReference<>();
-		this.currentTetrisObjectLocation = new AtomicReference<>();
+		this.currentTetrisObjectLocations = new AtomicReference<>();
 	}
 
 	@Override
@@ -31,12 +31,12 @@ public class ThreadSafeTetrisGameState implements TetrisGameState {
 	}
 
 	@Override
-	public Point2D getCurrentTetrisObjectPosition() {
-		return this.currentTetrisObjectLocation.get();
+	public Point2D[] getCurrentTetrisObjectPositions() {
+		return this.currentTetrisObjectLocations.get();
 	}
 
 	@Override
-	public void setCurrentTetrisObjectPosition(Point2D newLocation) {
-		this.currentTetrisObjectLocation.set(newLocation);
+	public void setCurrentTetrisObjectPosition(Point2D[] newLocations) {
+		this.currentTetrisObjectLocations.set(newLocations);
 	}
 }

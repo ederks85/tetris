@@ -1,7 +1,7 @@
 package games.tetris.engine.game;
 
 import games.tetris.engine.object.TetrisObject;
-import games.util.command.generic.MoveCommand;
+import games.util.command.generic.MultiLocationMoveCommand;
 
 /**
  * Interface for the methods that are needed for a component to schedule commands on the Tetris engine and get notified of the result.
@@ -25,5 +25,5 @@ public interface TetrisGameSubscriber {
 	 * 
 	 * @param MoveCommand The command that is to be executed by the Tetris engine.
 	 */
-	void scheduleTetrisMoveCommand(MoveCommand<TetrisObject> moveCommand);
+	void scheduleTetrisMoveCommand(MultiLocationMoveCommand<TetrisObject> moveCommand);
 }

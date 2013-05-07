@@ -3,7 +3,7 @@ package games.tetris.engine.ai.task;
 import games.tetris.engine.ai.TetrisAI;
 import games.tetris.engine.object.TetrisObject;
 import games.tetris.engine.object.TetrisObjectFactory;
-import games.util.command.generic.ThreadSafeMoveCommand;
+import games.util.command.generic.ThreadSafeMultiLocationMoveCommand;
 import games.util.grid.Point2D;
 
 import java.util.TimerTask;
@@ -35,16 +35,20 @@ public class TetrisAIMoveTask extends TimerTask {
 				currentObject = this.tetrisAI.getTetrisGameState().getCurrentTetrisObject();
 			}
 
-			final Point2D currentPosition = this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPosition();
-			final Point2D newPosition;
-			if (currentPosition == null) {
-				newPosition = new Point2D(5, 0);
+			final Point2D[] currentPositions = this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions();
+			final Point2D[] newPositions;
+			if (currentPositions == null) {
+				newPositions = new Point2D[]{new Point2D(5, 0), new Point2D(5, 1), new Point2D(6, 1), new Point2D(7, 1)};
 			} else {
-				newPosition = new Point2D(currentPosition.getX(), (currentPosition.getY() + 1));
+				newPositions = new Point2D[currentPositions.length];
+
+				for (int i=0; i < currentPositions.length; i++) {
+					newPositions[i] = new Point2D(currentPositions[i].getX(), currentPositions[i].getY() +1);
+				}
 			}
 
 			try {
-				this.tetrisAI.scheduleTetrisMoveCommand(new ThreadSafeMoveCommand<TetrisObject>(currentObject, this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPosition(), newPosition));
+				this.tetrisAI.scheduleTetrisMoveCommand(new ThreadSafeMultiLocationMoveCommand<TetrisObject>(currentObject, this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions(), newPositions));
 			} catch (Exception e) {
 				System.out.println("Game should end here...");
 				this.tetrisAI.stop();

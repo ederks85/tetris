@@ -1,12 +1,14 @@
 package games.tetris.engine.grid;
 
-import org.apache.commons.lang.Validate;
-
-import games.util.command.generic.MoveCommand;
+import games.util.command.generic.MultiLocationMoveCommand;
+import games.util.command.generic.SingleLocationMoveCommand;
 import games.util.grid.GridController;
 import games.util.grid.GridFieldOccupiedException;
 import games.util.grid.GridOutOfBoundsException;
+import games.util.grid.Point2D;
 import games.util.grid.Virtual2DGrid;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * Class that will perform thread-safe atomic operations on a {@code Virtual2DBooleanGrid}. A {@code Virtual2DBooleanGrid} will be used to define which grid fields are being occupied. 
@@ -18,8 +20,11 @@ public class TetrisGridController implements GridController {
 
 	private final Virtual2DGrid<Boolean> grid;
 
+	private final GridStateLogger<Boolean> gridLogger;
+
 	public TetrisGridController() {
 		this.grid = new TetrisGrid(10, 25); //TODO Make grid dimensions configurable in later version
+		this.gridLogger = new GridStateLogger<>(this.grid);
 	}
 
 	/**
@@ -28,12 +33,11 @@ public class TetrisGridController implements GridController {
 	 * is in synch with the object where the command is being performed for.
 	 */
 	@Override
-	public synchronized <T> void moveObject(MoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
+	public synchronized <T> void moveObject(SingleLocationMoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
 		Validate.notNull(moveCommand, "Move Command is null");
 		Validate.notNull(moveCommand.getNewLocation(), "Move Command's new location is null");
-		Boolean occupied = this.grid.getObjectAtPosition(moveCommand.getNewLocation().getX(), moveCommand.getNewLocation().getY());
 
-		if (occupied) {
+		if (isFieldOccupied(moveCommand.getNewLocation())) {
 			throw new GridFieldOccupiedException("Grid field (x=" + moveCommand.getNewLocation().getX() + ",y=" + moveCommand.getNewLocation().getY() + ") is already occupied");
 		} else {
 			// First perform the actual move
@@ -44,5 +48,65 @@ public class TetrisGridController implements GridController {
 				this.grid.setObjectAtPosition(Boolean.FALSE, moveCommand.getCurrentLocation().getX(), moveCommand.getCurrentLocation().getY());
 			}
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see #moveObject(SingleLocationMoveCommand)
+	 */
+	@Override
+	public synchronized <T> void moveObject(MultiLocationMoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
+		Validate.notNull(moveCommand, "Move Command is null");
+		Validate.notNull(moveCommand.getNewLocation(), "Move Command's new locations list is null");
+
+		if (moveCommand.getCurrentLocation() != null) {
+			// The object has positions that need to be moved on the grid. For take the object from the grid by clearing it's current location
+			for (Point2D currentLocation : moveCommand.getCurrentLocation()) {
+				this.grid.setObjectAtPosition(Boolean.FALSE, currentLocation.getX(), currentLocation.getY());
+			}
+
+			try {
+				for (Point2D newLocation : moveCommand.getNewLocation()) {
+					if (isFieldOccupied(newLocation)) {
+						throw new GridFieldOccupiedException("Cannot move object because Grid field (x=" + newLocation.getX() + ",y=" + newLocation.getY() + ") is already occupied");
+					}
+				}
+
+				// No exceptions occurred so we can safely place the object at it's new position
+				for (Point2D newLocation : moveCommand.getNewLocation()) {
+					this.grid.setObjectAtPosition(Boolean.TRUE, newLocation.getX(), newLocation.getY());
+				}
+			} catch (GridFieldOccupiedException | GridOutOfBoundsException e) {
+				// An exception has occurred during the checks if the move is possible. Place the object back at it's current locations.
+				for (Point2D currentLocation : moveCommand.getCurrentLocation()) {
+					this.grid.setObjectAtPosition(Boolean.TRUE, currentLocation.getX(), currentLocation.getY());
+				}
+
+				// Now the grid is back in synch again. Now propagate exception to let caller know why the move failed
+				throw e;
+			} finally {
+				this.gridLogger.logGridState();
+			}
+		} else {
+			// The object's locations are new on the grid so try to place them in the desired position and throw an exception when this is not possible
+			for (Point2D newLocation : moveCommand.getNewLocation()) {
+				if (isFieldOccupied(newLocation)) {
+					throw new GridFieldOccupiedException("Cannot place object because Grid field (x=" + newLocation.getX() + ",y=" + newLocation.getY() + ") is already occupied");
+				}
+			}
+
+			// All new locations are clear since no exceptions have occurred in the validation
+			for (Point2D newLocation : moveCommand.getNewLocation()) {
+				this.grid.setObjectAtPosition(Boolean.TRUE, newLocation.getX(), newLocation.getY());
+				this.gridLogger.logGridState();
+			}
+		}
+	}
+
+	private boolean isFieldOccupied(Point2D location) throws GridOutOfBoundsException {
+		Validate.notNull(location, "Location is null");
+
+		return this.grid.getObjectAtPosition(location.getX(), location.getY());
 	}
 }

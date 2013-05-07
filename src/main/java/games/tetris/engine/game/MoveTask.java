@@ -1,7 +1,7 @@
 package games.tetris.engine.game;
 
 import games.tetris.engine.object.TetrisObject;
-import games.util.command.generic.MoveCommand;
+import games.util.command.generic.MultiLocationMoveCommand;
 import games.util.grid.GridController;
 
 import java.util.concurrent.Callable;
@@ -14,10 +14,10 @@ import org.apache.commons.lang.Validate;
  * @author edwin
  *
  */
-public class MoveTask implements Callable<MoveCommand<TetrisObject>> {
+public class MoveTask implements Callable<MultiLocationMoveCommand<TetrisObject>> {
 
 	private final GridController gridController;
-	private final MoveCommand<TetrisObject> moveCommand;
+	private final MultiLocationMoveCommand<TetrisObject> moveCommand;
 
 	/**
 	 * Provide the task with the necessary resources to perform a move task on a grid via a controller.
@@ -25,7 +25,7 @@ public class MoveTask implements Callable<MoveCommand<TetrisObject>> {
 	 * @param gridController	the grid controller that will perform the 
 	 * @param moveCommand		the details of the move
 	 */
-	public MoveTask(GridController gridController, MoveCommand<TetrisObject> moveCommand) {
+	public MoveTask(GridController gridController, MultiLocationMoveCommand<TetrisObject> moveCommand) {
 		Validate.notNull(gridController, "Grid controller is null");
 		Validate.notNull(moveCommand, "Move command is null");
 
@@ -34,7 +34,7 @@ public class MoveTask implements Callable<MoveCommand<TetrisObject>> {
 	}
 
 	@Override
-	public MoveCommand<TetrisObject> call() throws Exception {
+	public MultiLocationMoveCommand<TetrisObject> call() throws Exception {
 		this.gridController.moveObject(this.moveCommand);
 		return this.moveCommand;
 	}

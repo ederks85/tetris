@@ -1,15 +1,15 @@
 package games.tetris.engine.ai;
 
-import java.util.Timer;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
 import games.tetris.engine.ai.task.TetrisAIMoveTask;
 import games.tetris.engine.game.AbstractTetrisGameSubscriber;
 import games.tetris.engine.object.TetrisObject;
-import games.util.command.generic.MoveCommand;
+import games.util.command.generic.MultiLocationMoveCommand;
 import games.util.grid.GridFieldOccupiedException;
 import games.util.grid.GridOutOfBoundsException;
+
+import java.util.Timer;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * The AI that schedules timed move commands on the engine.
@@ -26,7 +26,7 @@ public class TetrisAI extends AbstractTetrisGameSubscriber {
 	 * Create the object that schedules move commands on the Tetris engine at a desired interval.
 	 */
 	public TetrisAI() {
-		this.interval = 1000; //(milliseconds) TODO make interval configurable
+		this.interval = 200; //(milliseconds) TODO make interval configurable
 		this.timer = new Timer("TetrisAI");
 
 	}
@@ -46,9 +46,9 @@ public class TetrisAI extends AbstractTetrisGameSubscriber {
 	}
 
 	@Override
-	public void scheduleTetrisMoveCommand(MoveCommand<TetrisObject> moveCommand) {
+	public void scheduleTetrisMoveCommand(MultiLocationMoveCommand<TetrisObject> moveCommand) {
 		try {
-			final Future<MoveCommand<TetrisObject>> executedCommand = getCommandProcessor().performMoveAction(moveCommand);
+			final Future<MultiLocationMoveCommand<TetrisObject>> executedCommand = getCommandProcessor().performMoveAction(moveCommand);
 			executedCommand.get();
 
 			// TetrisAIMoveTask should have synchronized on the game state so that it can update the game state with the performed move

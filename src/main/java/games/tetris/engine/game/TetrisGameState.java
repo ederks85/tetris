@@ -26,16 +26,16 @@ public interface TetrisGameState {
 	void setCurrentTetrisObject(TetrisObject newTetrisObject);
 
 	/**
-	 * Get the position that the {@code TetrisObject} that is currently in play resides at.
+	 * Get the positions of the composite {@code TetrisObject} that is currently in play resides at.
 	 * 
-	 * @return The current location.
+	 * @return The current locations.
 	 */
-	Point2D getCurrentTetrisObjectPosition();
+	Point2D[] getCurrentTetrisObjectPositions();
 
 	/**
-	 * Update the location of the {@code TetrisObject} that is currently in play.
+	 * Update the locations of the composite {@code TetrisObject} that is currently in play.
 	 * 
-	 * @param newLocation The new location or {@code null} when the object is no longer in play.
+	 * @param newLocations The new locations or {@code null} when the object is no longer in play.
 	 */
-	void setCurrentTetrisObjectPosition(Point2D newLocation);
+	void setCurrentTetrisObjectPosition(Point2D[] newLocations);
 }

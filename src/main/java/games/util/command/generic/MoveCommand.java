@@ -1,15 +1,17 @@
 package games.util.command.generic;
 
-import games.util.grid.Point2D;
-
-
 /**
  * Interface that defines a command for moving a specific object from one position to another.
  * 
  * @author edwin
  *
+ * @param T the type of object that is to be moved
+ * @param V the type of object that contains the location of the object, or locations of the object when the object is a composite object.
+ * 
+ * @see SingleLocationMoveCommand
+ * @see MultiLocationMoveCommand
  */
-public interface MoveCommand<T> {
+public interface MoveCommand<T, V> {
 
 	/**
 	 * @return the object where a move command will be performed. Never null.
@@ -17,17 +19,17 @@ public interface MoveCommand<T> {
 	T getObject();
 
 	/**
-	 * @return The current location the object resides at. Can never be null.
+	 * @return The current location(s) the object resides at. Can never be null.
 	 */
-	Point2D getCurrentLocation();
+	V getCurrentLocation();
 
 	/**
-	 * @return the location after the move command has been performed via {@link #setNewLocation()} or returns the location where the object has to be moved to.
+	 * @return the location(s) after the move command has been performed via {@link #setNewLocation()} or returns the location(s) where the object has to be moved to.
 	 */
-	Point2D getNewLocation();
+	V getNewLocation();
 
 	/**
-	 * Set the new location of the object. Can be null when the object does not or no longer exist at the new location.
+	 * Set the new location(s) of the object. Can be null when the object does not or no longer exist at the new location(s).
 	 */
-	void setNewLocation(Point2D newLocation);
+	void setNewLocation(V newLocation);
 }
