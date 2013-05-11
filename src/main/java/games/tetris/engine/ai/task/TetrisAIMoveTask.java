@@ -4,8 +4,10 @@ import games.tetris.engine.ai.TetrisAI;
 import games.tetris.engine.object.TetrisObject;
 import games.tetris.engine.object.TetrisObjectFactory;
 import games.util.command.generic.ThreadSafeMultiLocationMoveCommand;
+import games.util.grid.GridOutOfBoundsException;
 import games.util.grid.Point2D;
 
+import java.awt.Dimension;
 import java.util.TimerTask;
 
 import org.apache.commons.lang.Validate;
@@ -38,7 +40,26 @@ public class TetrisAIMoveTask extends TimerTask {
 			final Point2D[] currentPositions = this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions();
 			final Point2D[] newPositions;
 			if (currentPositions == null) {
-				newPositions = new Point2D[]{new Point2D(5, 0), new Point2D(5, 1), new Point2D(6, 1), new Point2D(7, 1)};
+				newPositions = new Point2D[currentObject.getNumberOfPositions()];
+				int newPositionCounter = 0;
+
+				final int initialXPosition = 5;
+				final int initialYPosition = 0;
+
+				final Dimension currentObjectDimensions = currentObject.getDimensions();
+				for (int i = 0; i < currentObjectDimensions.getWidth(); i++) {
+					for (int j = 0; j < currentObjectDimensions.getHeight(); j++) {
+						try {
+							if (currentObject.isPositionOccupied(i, j)) {
+								newPositions[newPositionCounter] = new Point2D(initialXPosition + i, initialYPosition + j);
+								newPositionCounter++;
+							}
+						} catch (GridOutOfBoundsException e) {
+							e.printStackTrace();
+							throw new IllegalStateException("Exception while determining initial position of TetrisObject on the grid.", e);
+						}
+					}
+				}
 			} else {
 				newPositions = new Point2D[currentPositions.length];
 

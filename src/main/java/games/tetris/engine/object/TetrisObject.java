@@ -30,4 +30,9 @@ public interface TetrisObject {
 	 * @return	The dimensions of the object. Can never be null.
 	 */
 	Dimension getDimensions();
+
+	/**
+	 * @return The number of positions that the object contains.
+	 */
+	int getNumberOfPositions();
 }

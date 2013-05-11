@@ -1,8 +1,7 @@
 package games.tetris.engine.object;
 
-import java.awt.Dimension;
-
 import games.util.grid.GridOutOfBoundsException;
+import games.util.grid.Point2D;
 
 /**
  * Factory class for retrieving the available Tetris objects.
@@ -12,6 +11,11 @@ import games.util.grid.GridOutOfBoundsException;
  */
 public final class TetrisObjectFactory {
 
+	private static final Point2D[] TETRISOBJECT1_SHAPE_DETAILS;
+	static {
+		TETRISOBJECT1_SHAPE_DETAILS = new Point2D[]{new Point2D(0, 0), new Point2D(0, 1), new Point2D(1, 1), new Point2D(1, 2)};
+	}
+
 	private TetrisObjectFactory() {}
 
 	/**
@@ -20,15 +24,13 @@ public final class TetrisObjectFactory {
 	 * @return A new instance of {@code TetrisObject}. Never null.
 	 */
 	public static TetrisObject getRandomTetrisObject() {
-		return new TetrisObject(){@Override
-		public Boolean isPositionOccupied(int x, int y) throws GridOutOfBoundsException {
-			return true;
-		}
+		final TetrisObjectShape shape = new TetrisObjectShape(TETRISOBJECT1_SHAPE_DETAILS); //TODO randomize
 
-		@Override
-			public Dimension getDimensions() {
-				return new Dimension(2,4);
-			}
-		};
+		try {
+			return new ImmutableTetrisObject(shape.getWidth(), shape.getHeigth(), shape.getOccupiedLocations());
+		} catch (GridOutOfBoundsException e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException("Invalid specifications for TetrisObject found", e);
+		}
 	}
 }
