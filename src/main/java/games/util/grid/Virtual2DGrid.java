@@ -1,6 +1,6 @@
 package games.util.grid;
 
-import java.awt.Dimension;
+import games.util.grid.Dimension;
 
 /**
  * Interface for classes that represents a 2D grid in memory.
@@ -34,5 +34,8 @@ public interface Virtual2DGrid<T> {
 	 */
 	T getObjectAtPosition(int x, int y) throws GridOutOfBoundsException;
 
+	/**
+	 * @return A {@code Dimension} object that contains the grid's width and height.
+	 */
 	Dimension getGridDimensions();
 }

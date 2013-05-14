@@ -28,7 +28,6 @@ public class TetrisAI extends AbstractTetrisGameSubscriber {
 	public TetrisAI() {
 		this.interval = 200; //(milliseconds) TODO make interval configurable
 		this.timer = new Timer("TetrisAI");
-
 	}
 
 	/**
@@ -51,7 +50,7 @@ public class TetrisAI extends AbstractTetrisGameSubscriber {
 			final Future<MultiLocationMoveCommand<TetrisObject>> executedCommand = getCommandProcessor().performMoveAction(moveCommand);
 			executedCommand.get();
 
-			// TetrisAIMoveTask should have synchronized on the game state so that it can update the game state with the performed move
+			// If no exception has occurred, we can update the game state with the new location of current object
 			getTetrisGameState().setCurrentTetrisObject(moveCommand.getObject());
 			getTetrisGameState().setCurrentTetrisObjectPosition(moveCommand.getNewLocation());
 		} catch (Exception e) {

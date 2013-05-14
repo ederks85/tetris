@@ -36,8 +36,8 @@ class GridStateLogger<T> {
 		try {
 	//		System.out.print("Start Logging Grid State:" + System.getProperty("line.separator"));
 			this.file.setLength(0);
-			for (int i=0; i < this.grid.getGridDimensions().height; i++) {
-				for (int j=0; j < this.grid.getGridDimensions().width; j++) {
+			for (int i=0; i < this.grid.getGridDimensions().getHeight(); i++) {
+				for (int j=0; j < this.grid.getGridDimensions().getWidth(); j++) {
 					try {
 						this.file.writeChars(" " + (this.grid.getObjectAtPosition(j, i) == (Boolean.TRUE) ? "1" : "0"));
 					} catch (GridOutOfBoundsException e) {

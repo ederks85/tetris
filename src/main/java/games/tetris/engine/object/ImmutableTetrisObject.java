@@ -1,6 +1,6 @@
 package games.tetris.engine.object;
 
-import java.awt.Dimension;
+import games.util.grid.Dimension;
 
 import games.util.grid.GridOutOfBoundsException;
 import games.util.grid.Point2D;

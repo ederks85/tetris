@@ -1,8 +1,8 @@
 package games.tetris.engine.object;
 
+import games.util.grid.Dimension;
 import games.util.grid.GridOutOfBoundsException;
 
-import java.awt.Dimension;
 
 /**
  * Interface for an object that contains the data to represent a Tetris object.
