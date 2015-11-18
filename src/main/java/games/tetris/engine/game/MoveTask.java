@@ -1,12 +1,12 @@
 package games.tetris.engine.game;
 
+import java.util.concurrent.Callable;
+
+import org.apache.commons.lang3.Validate;
+
 import games.tetris.engine.object.TetrisObject;
 import games.util.command.generic.MultiLocationMoveCommand;
 import games.util.grid.GridController;
-
-import java.util.concurrent.Callable;
-
-import org.apache.commons.lang.Validate;
 
 /**
  * Class that wraps performing the move command on the actual grid.

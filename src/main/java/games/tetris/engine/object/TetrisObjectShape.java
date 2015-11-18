@@ -2,7 +2,7 @@ package games.tetris.engine.object;
 
 import java.util.Arrays;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 import games.util.grid.Point2D;
 

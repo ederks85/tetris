@@ -1,5 +1,11 @@
 package games.tetris.engine.ai.task;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TimerTask;
+
+import org.apache.commons.lang3.Validate;
+
 import games.tetris.engine.ai.TetrisAI;
 import games.tetris.engine.object.TetrisObject;
 import games.tetris.engine.object.TetrisObjectFactory;
@@ -7,12 +13,6 @@ import games.util.command.generic.ThreadSafeMultiLocationMoveCommand;
 import games.util.grid.Dimension;
 import games.util.grid.GridOutOfBoundsException;
 import games.util.grid.Point2D;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimerTask;
-
-import org.apache.commons.lang.Validate;
 
 /**
  * Implementation for basic move task that is scheduled by a {@code TetrisAI}. 

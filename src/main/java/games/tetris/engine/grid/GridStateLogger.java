@@ -1,12 +1,12 @@
 package games.tetris.engine.grid;
 
-import games.util.grid.GridOutOfBoundsException;
-import games.util.grid.Virtual2DGrid;
-
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
+
+import games.util.grid.GridOutOfBoundsException;
+import games.util.grid.Virtual2DGrid;
 
 /**
  * Class that logs the state of a grid to a file. The log will show '0' where grid locations are emtpy and '1' where grid locations are filled with an object.
@@ -25,7 +25,7 @@ class GridStateLogger<T> {
 		Validate.notNull(grid, "Grid is null");
 		this.grid = grid;
 		try {
-			this.file = new RandomAccessFile("/home/edwin/Documents/Projects/tetris.log", "rw");
+			this.file = new RandomAccessFile("c:\\temp\\tetris.log", "rw");
 			this.file.setLength(0);
 		} catch (Exception e) {
 			e.printStackTrace();

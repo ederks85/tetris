@@ -3,9 +3,9 @@ package games.util.command.generic;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import games.util.grid.Point2D;
+import org.apache.commons.lang3.Validate;
 
-import org.apache.commons.lang.Validate;
+import games.util.grid.Point2D;
 
 /**
  * Object that performs a move command that can be shared by multiple threads. This class expects the composite object to be available on multiple locations.

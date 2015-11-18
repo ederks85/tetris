@@ -1,15 +1,15 @@
 package games.tetris.engine.game;
 
-import games.tetris.engine.grid.TetrisGridController;
-import games.tetris.engine.object.TetrisObject;
-import games.util.command.generic.MultiLocationMoveCommand;
-import games.util.grid.GridController;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
+
+import games.tetris.engine.grid.TetrisGridController;
+import games.tetris.engine.object.TetrisObject;
+import games.util.command.generic.MultiLocationMoveCommand;
+import games.util.grid.GridController;
 
 /**
  * Class that represents the command executor part of the Tetris Engine. Via this class, different threads can request to perform commands and block on them until the executor has finished them.
