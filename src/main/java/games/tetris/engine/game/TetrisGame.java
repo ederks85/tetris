@@ -53,13 +53,35 @@ public class TetrisGame {
 	/**
 	 * Method that should be called when the game has ended to clean up resources.
 	 */
-	public void cleanUp() {
+	public void shutdown() {
 		for (AbstractTetrisGameSubscriber subscriber : this.subscribers) {
 			subscriber.setCommandProcessor(null);
 			subscriber.setTetrisGameState(null);
-
-			this.subscribers.remove(subscriber);
 		}
+		this.subscribers.clear();
+
 		this.tetrisCommandProcessor.shutdown();
+	}
+
+	/**
+	 * Check if the game is shut down.
+	 * 
+	 * @return {@code true} when the game is currently shut down.
+	 * 
+	 * @throws IllegalStateException when the game has not been properly shut down.
+	 */
+	public boolean isShutdown() {
+		boolean shutdown = this.tetrisCommandProcessor.isShutdown();
+		if (shutdown && this.subscribers.size() > 0) {
+			throw new IllegalStateException("Invalid shutdown state: Number is subscribers is greater than 0: " + this.subscribers.size());
+		}
+		return shutdown;
+	}
+
+	/**
+	 * @return An unmodifiable {@code Collection} that contains the current subscribers.
+	 */
+	public Collection<AbstractTetrisGameSubscriber> getSubscribers() {
+		return Collections.unmodifiableCollection(this.subscribers);
 	}
 }

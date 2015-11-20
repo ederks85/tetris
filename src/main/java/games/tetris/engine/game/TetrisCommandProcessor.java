@@ -36,9 +36,13 @@ public class TetrisCommandProcessor { //TODO maybe make interface of this, more 
 
 	/**
 	 * Method to be called when the processor needs to be stopped, for example when the program ends. This method will clean all resources and memory. Should not 
-	 * be called and even be available to only the component that manages the insance of this class.
+	 * be called and even be available to only the component that manages the instance of this class.
 	 */
 	void shutdown() {
 		this.processor.shutdown();
+	}
+
+	public boolean isShutdown() {
+		return this.processor.isShutdown();
 	}
 }

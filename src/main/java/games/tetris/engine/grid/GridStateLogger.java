@@ -5,7 +5,6 @@ import java.io.RandomAccessFile;
 
 import org.apache.commons.lang3.Validate;
 
-import games.util.grid.GridOutOfBoundsException;
 import games.util.grid.Virtual2DGrid;
 
 /**
@@ -38,11 +37,11 @@ class GridStateLogger<T> {
 			this.file.setLength(0);
 			for (int i=0; i < this.grid.getGridDimensions().getHeight(); i++) {
 				for (int j=0; j < this.grid.getGridDimensions().getWidth(); j++) {
-					try {
-						this.file.writeChars(" " + (this.grid.getObjectAtPosition(j, i) == (Boolean.TRUE) ? "1" : "0"));
-					} catch (GridOutOfBoundsException e) {
-	//					e.printStackTrace();
-					}
+//					try {
+//						this.file.writeChars(" " + (this.grid.getObjectAtPosition(j, i) == (Boolean.TRUE) ? "1" : "0"));
+//					} catch (GridOutOfBoundsException e) {
+//						e.printStackTrace();
+//					}
 				}
 				this.file.writeChars(System.getProperty("line.separator"));
 	//			System.out.print(System.getProperty("line.separator"));
