@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
+import lombok.NonNull;
 import org.apache.commons.lang3.Validate;
 
 import games.tetris.engine.ai.TetrisAI;
@@ -24,8 +25,7 @@ public class TetrisAIMoveTask extends TimerTask {
 
 	private final TetrisAI tetrisAI;
 
-	public TetrisAIMoveTask(TetrisAI tetrisAI) {
-		Validate.notNull(tetrisAI, "TetrisAI is null.");
+	public TetrisAIMoveTask(@NonNull TetrisAI tetrisAI) {
 		this.tetrisAI = tetrisAI;
 	}
 
@@ -43,8 +43,8 @@ public class TetrisAIMoveTask extends TimerTask {
 			final Point2D[] currentPositions = this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions();
 
 			if (currentPositions == null) { // The object is not yet place on the grid. Move it on the grid in steps.
-				Point2D[] newPositions = null;
-				Point2D[] filteredNewPositions = null;
+				Point2D[] newPositions;
+				Point2D[] filteredNewPositions;
 
 				final ObjectPositionPreserver preserver = new ObjectPositionPreserver(createCurrentObjectInitialPositions(currentObject));
 
@@ -52,7 +52,7 @@ public class TetrisAIMoveTask extends TimerTask {
 					newPositions = preserver.calculateNextPositions();
 					filteredNewPositions = filterInvalidPositions(newPositions);
 
-					final ThreadSafeMultiLocationMoveCommand<TetrisObject> moveCommand = new ThreadSafeMultiLocationMoveCommand<TetrisObject>(currentObject, this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions(), filteredNewPositions);
+					final ThreadSafeMultiLocationMoveCommand<TetrisObject> moveCommand = new ThreadSafeMultiLocationMoveCommand<>(currentObject, this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions(), filteredNewPositions);
 					this.tetrisAI.scheduleTetrisMoveCommand(moveCommand);
 				}
 				while (!(newPositions.length == filteredNewPositions.length));
@@ -63,15 +63,13 @@ public class TetrisAIMoveTask extends TimerTask {
 					newPositions[i] = new Point2D(currentPositions[i].getX(), currentPositions[i].getY() +1);
 				}
 
-				final ThreadSafeMultiLocationMoveCommand<TetrisObject> moveCommand = new ThreadSafeMultiLocationMoveCommand<TetrisObject>(currentObject, this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions(), newPositions);
+				final ThreadSafeMultiLocationMoveCommand<TetrisObject> moveCommand = new ThreadSafeMultiLocationMoveCommand<>(currentObject, this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions(), newPositions);
 				this.tetrisAI.scheduleTetrisMoveCommand(moveCommand);
 			}
 		}
 	}
 
-	private Point2D[] createCurrentObjectInitialPositions(final TetrisObject currentObject) {
-		Validate.notNull(currentObject, "Current TetrisObject is null");
-
+	private Point2D[] createCurrentObjectInitialPositions(@NonNull final TetrisObject currentObject) {
 		Point2D[] initialPositions = new Point2D[currentObject.getNumberOfPositions()];
 		int initialPositionCounter = 0;
 
@@ -97,10 +95,8 @@ public class TetrisAIMoveTask extends TimerTask {
 		return initialPositions;
 	}
 
-	private static Point2D[] filterInvalidPositions(final Point2D[] positions) {
-		Validate.notNull(positions, "Positions is null");
-
-		List<Point2D> temp = new ArrayList<Point2D>();
+	private static Point2D[] filterInvalidPositions(@NonNull final Point2D[] positions) {
+		List<Point2D> temp = new ArrayList<>();
 
 		for (Point2D position : positions) {
 			if (position.getX() >= 0 && position.getY() >= 0) {
@@ -116,13 +112,11 @@ public class TetrisAIMoveTask extends TimerTask {
 
 		private Point2D[] preservedPositions;
 
-		public ObjectPositionPreserver(final Point2D[] preservedPositions) {
-			Validate.notNull(preservedPositions, "PreservedPositions is null");
-
+		ObjectPositionPreserver(@NonNull final Point2D[] preservedPositions) {
 			this.preservedPositions = preservedPositions;
 		}
 
-		public Point2D[] calculateNextPositions() {
+		Point2D[] calculateNextPositions() {
 			final Point2D[] calculatedPositions = new Point2D[this.preservedPositions.length];
 
 			for (int i=0; i < this.preservedPositions.length; i++) {

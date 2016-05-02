@@ -36,6 +36,11 @@ public class TetrisEngineSubscribeTest {
 		assertEquals(1, g.getSubscribers().size());
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void subscribeNullAI() {
+		g.subscribe(null);
+	}
+
 	@Test
 	public void unsubscribeAI() {
 		g.unsubscribe(ai);

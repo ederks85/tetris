@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import lombok.NonNull;
 import org.apache.commons.lang3.Validate;
 
 import games.tetris.engine.grid.TetrisGridController;
@@ -22,14 +23,12 @@ public class TetrisCommandProcessor { //TODO maybe make interface of this, more 
 	private final ExecutorService processor;
 	private final GridController gridController;
 
-	public TetrisCommandProcessor() {
+	TetrisCommandProcessor() {
 		this.processor = Executors.newSingleThreadExecutor();
 		this.gridController = new TetrisGridController();
 	}
 
-	public Future<MultiLocationMoveCommand<TetrisObject>> performMoveAction(final MultiLocationMoveCommand<TetrisObject> moveCommand) { //TODO In later version, switch Object to some sort of Tetris object
-		Validate.notNull(moveCommand, "Move Command is null.");
-
+	public Future<MultiLocationMoveCommand<TetrisObject>> performMoveAction(@NonNull final MultiLocationMoveCommand<TetrisObject> moveCommand) { //TODO In later version, switch Object to some sort of Tetris object
 		MoveTask moveTask = new MoveTask(this.gridController, moveCommand);
 		return this.processor.submit(moveTask);
 	}
@@ -42,7 +41,7 @@ public class TetrisCommandProcessor { //TODO maybe make interface of this, more 
 		this.processor.shutdown();
 	}
 
-	public boolean isShutdown() {
+	boolean isShutdown() {
 		return this.processor.isShutdown();
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import lombok.NonNull;
 import org.apache.commons.lang3.Validate;
 
 /**
@@ -24,16 +25,13 @@ public class TetrisGame {
 	public TetrisGame() {
 		this.tetrisCommandProcessor = new TetrisCommandProcessor();
 		this.tetrisGameState = new ThreadSafeTetrisGameState();
-		this.subscribers = Collections.synchronizedList(new ArrayList<AbstractTetrisGameSubscriber>());
+		this.subscribers = Collections.synchronizedList(new ArrayList<>());
 	}
 
 	/**
 	 * Subscribe a component to the Tetris game. After subscription, the component can access the game state and place commands.
-	 * 
-	 * @param tetrisGameSubscriber 
 	 */
-	public void subscribe(final AbstractTetrisGameSubscriber tetrisGameSubscriber) {
-		Validate.notNull(tetrisGameSubscriber, "TetrisGameSubscriber is null");
+	public void subscribe(@NonNull final AbstractTetrisGameSubscriber tetrisGameSubscriber) {
 		tetrisGameSubscriber.setCommandProcessor(this.tetrisCommandProcessor);
 		tetrisGameSubscriber.setTetrisGameState(this.tetrisGameState);
 
@@ -41,8 +39,7 @@ public class TetrisGame {
 		this.subscribers.add(tetrisGameSubscriber);
 	}
 
-	public void unsubscribe(final AbstractTetrisGameSubscriber tetrisGameSubscriber) {
-		Validate.notNull(tetrisGameSubscriber, "TetrisGameSubscriber is null");
+	public void unsubscribe(@NonNull final AbstractTetrisGameSubscriber tetrisGameSubscriber) {
 		tetrisGameSubscriber.setCommandProcessor(null);
 		tetrisGameSubscriber.setTetrisGameState(null);
 

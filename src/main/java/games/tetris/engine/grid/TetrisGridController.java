@@ -1,5 +1,6 @@
 package games.tetris.engine.grid;
 
+import lombok.NonNull;
 import org.apache.commons.lang3.Validate;
 
 import games.util.command.generic.MultiLocationMoveCommand;
@@ -33,8 +34,7 @@ public class TetrisGridController implements GridController {
 	 * is in synch with the object where the command is being performed for.
 	 */
 	@Override
-	public synchronized <T> void moveObject(SingleLocationMoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
-		Validate.notNull(moveCommand, "Move Command is null");
+	public synchronized <T> void moveObject(@NonNull SingleLocationMoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
 		Validate.notNull(moveCommand.getNewLocation(), "Move Command's new location is null");
 
 		if (isFieldOccupied(moveCommand.getNewLocation())) {
@@ -56,8 +56,7 @@ public class TetrisGridController implements GridController {
 	 * @see #moveObject(SingleLocationMoveCommand)
 	 */
 	@Override
-	public synchronized <T> void moveObject(MultiLocationMoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
-		Validate.notNull(moveCommand, "Move Command is null");
+	public synchronized <T> void moveObject(@NonNull MultiLocationMoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
 		Validate.notNull(moveCommand.getNewLocation(), "Move Command's new locations list is null");
 
 		if (moveCommand.getCurrentLocation() != null) {
@@ -104,9 +103,7 @@ public class TetrisGridController implements GridController {
 		}
 	}
 
-	private boolean isFieldOccupied(Point2D location) throws GridOutOfBoundsException {
-		Validate.notNull(location, "Location is null");
-
+	private boolean isFieldOccupied(@NonNull Point2D location) throws GridOutOfBoundsException {
 		return this.grid.getObjectAtPosition(location.getX(), location.getY());
 	}
 }
