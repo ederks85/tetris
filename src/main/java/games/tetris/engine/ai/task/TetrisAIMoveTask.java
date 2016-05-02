@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.TimerTask;
 
 import lombok.NonNull;
-import org.apache.commons.lang3.Validate;
 
 import games.tetris.engine.ai.TetrisAI;
 import games.tetris.engine.object.TetrisObject;
@@ -35,7 +34,7 @@ public class TetrisAIMoveTask extends TimerTask {
 
 			final TetrisObject currentObject;
 			if (this.tetrisAI.getTetrisGameState().getCurrentTetrisObject() == null) {
-				currentObject = TetrisObjectFactory.getRandomTetrisObject();
+				currentObject = TetrisObjectFactory.createRandomTetrisObject();
 			} else {
 				currentObject = this.tetrisAI.getTetrisGameState().getCurrentTetrisObject();
 			}

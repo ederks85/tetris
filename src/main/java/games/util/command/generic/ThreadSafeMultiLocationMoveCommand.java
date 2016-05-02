@@ -2,6 +2,7 @@ package games.util.command.generic;
 
 
 import games.util.grid.Point2D;
+import lombok.Getter;
 import lombok.NonNull;
 import org.apache.commons.lang3.Validate;
 
@@ -15,6 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class ThreadSafeMultiLocationMoveCommand<T> implements MultiLocationMoveCommand<T> {
 
+	@Getter
 	private final T object;
 
 	private final AtomicReference<Point2D[]> currentLocations;
@@ -39,11 +41,6 @@ public class ThreadSafeMultiLocationMoveCommand<T> implements MultiLocationMoveC
 	 */
 	public ThreadSafeMultiLocationMoveCommand(final T object) {
 		this(object, null, null);
-	}
-
-	@Override
-	public T getObject() {
-		return this.object;
 	}
 
 	@Override

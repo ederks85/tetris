@@ -23,7 +23,7 @@ public final class TetrisObjectFactory {
 	 * 
 	 * @return A new instance of {@code TetrisObject}. Never null.
 	 */
-	public static TetrisObject getRandomTetrisObject() {
+	public static TetrisObject createRandomTetrisObject() {
 		final TetrisObjectShape shape = new TetrisObjectShape(TETRISOBJECT1_SHAPE_DETAILS); //TODO randomize
 
 		try {

@@ -1,5 +1,6 @@
 package games.tetris.engine.object;
 
+import lombok.Getter;
 import org.apache.commons.lang3.Validate;
 
 import games.util.grid.Dimension;
@@ -26,6 +27,7 @@ import games.util.grid.Virtual2DBooleanGrid;
  */
 public class ImmutableTetrisObject extends Virtual2DBooleanGrid implements TetrisObject {
 
+	@Getter
 	private final int numberOfPositions;
 
 	public ImmutableTetrisObject(int width, int height, Point2D[] occupiedLocations) throws GridOutOfBoundsException {
@@ -47,10 +49,5 @@ public class ImmutableTetrisObject extends Virtual2DBooleanGrid implements Tetri
 	@Override
 	public Boolean isPositionOccupied(int x, int y) throws GridOutOfBoundsException {
 		return this.getObjectAtPosition(x, y);
-	}
-
-	@Override
-	public int getNumberOfPositions() {
-		return this.numberOfPositions;
 	}
 }

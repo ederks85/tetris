@@ -2,6 +2,7 @@ package games.tetris.engine.object;
 
 import java.util.Arrays;
 
+import lombok.Getter;
 import org.apache.commons.lang3.Validate;
 
 import games.util.grid.Point2D;
@@ -14,7 +15,10 @@ import games.util.grid.Point2D;
  */
 public class TetrisObjectShape {
 
+	@Getter()
 	private final int width;
+
+	@Getter
 	private final int heigth;
 
 	private final Point2D[] occupiedLocations;
@@ -45,62 +49,10 @@ public class TetrisObjectShape {
 		this.heigth = tempHeight + 1;
 	}
 
-	public int getWidth() {
-		return this.width;
-	}
-
-	public int getHeigth() {
-		return this.heigth;
-	}
-
 	/**
 	 * @return A copy of the occupied locations that mark the shape of a {@code TetrisObject}.
 	 */
 	public Point2D[] getOccupiedLocations() {
 		return Arrays.copyOf(this.occupiedLocations, this.occupiedLocations.length);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + this.heigth;
-		result = prime * result + Arrays.hashCode(this.occupiedLocations);
-		result = prime * result + this.width;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-
-		if (obj == null) {
-			return false;
-		}
-
-		if (!(obj instanceof TetrisObjectShape)) {
-			return false;
-		}
-
-		TetrisObjectShape other = (TetrisObjectShape) obj;
-		if (this.heigth != other.heigth) {
-			return false;
-		}
-
-		if (!Arrays.equals(this.occupiedLocations, other.occupiedLocations)) {
-			return false;
-		}
-
-		if (this.width != other.width) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return this.getClass().getSimpleName() + " widht=" + this.width + ", height=" + this.heigth + ", occupiedLocations=" + this.occupiedLocations;
 	}
 }

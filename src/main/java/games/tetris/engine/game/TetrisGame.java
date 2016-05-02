@@ -30,6 +30,7 @@ public class TetrisGame {
 
 	/**
 	 * Subscribe a component to the Tetris game. After subscription, the component can access the game state and place commands.
+	 *
 	 */
 	public void subscribe(@NonNull final AbstractTetrisGameSubscriber tetrisGameSubscriber) {
 		tetrisGameSubscriber.setCommandProcessor(this.tetrisCommandProcessor);
