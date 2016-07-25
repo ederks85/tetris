@@ -44,7 +44,10 @@ public class TetrisObjectShape {
 			}
 		}
 
-		this.occupiedLocations = occupiedLocations;
+		this.occupiedLocations = new Point2D[occupiedLocations.length];
+		for (int i=0; i < occupiedLocations.length; i++) {
+			this.occupiedLocations[i] = occupiedLocations[i];
+		}
 		this.width = tempWidht + 1;
 		this.heigth = tempHeight + 1;
 	}

@@ -21,11 +21,8 @@ public class TetrisGridController implements GridController {
 
 	private final Virtual2DGrid<Boolean> grid;
 
-	private final GridStateLogger<Boolean> gridLogger;
-
 	public TetrisGridController() {
 		this.grid = new TetrisGrid(10, 25); //TODO Make grid dimensions configurable in later version
-		this.gridLogger = new GridStateLogger<>(this.grid);
 	}
 
 	/**
@@ -84,8 +81,6 @@ public class TetrisGridController implements GridController {
 
 				// Now the grid is back in synch again. Now propagate exception to let caller know why the move failed
 				throw e;
-			} finally {
-				this.gridLogger.logGridState();
 			}
 		} else {
 			// The object's locations are new on the grid so try to place them in the desired position and throw an exception when this is not possible
@@ -98,7 +93,6 @@ public class TetrisGridController implements GridController {
 			// All new locations are clear since no exceptions have occurred in the validation
 			for (Point2D newLocation : moveCommand.getNewLocation()) {
 				this.grid.setObjectAtPosition(Boolean.TRUE, newLocation.getX(), newLocation.getY());
-				this.gridLogger.logGridState();
 			}
 		}
 	}

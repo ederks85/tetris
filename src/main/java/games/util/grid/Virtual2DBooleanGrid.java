@@ -24,7 +24,7 @@ public class Virtual2DBooleanGrid extends AbstractVirtual2DGrid<Boolean> {
 	@Override
 	public Boolean getObjectAtPosition(int x, int y) throws GridOutOfBoundsException {
 		checkPosition(x, y);
-		if (this.grid[x][y] == Boolean.TRUE) {
+		if (this.grid[x][y] == true) {
 			return this.grid[x][y];
 		} else {
 			return Boolean.FALSE;
