@@ -65,7 +65,8 @@ public class TetrisGridController implements GridController {
 			try {
 				for (Point2D newLocation : moveCommand.getNewLocation()) {
 					if (isFieldOccupied(newLocation)) {
-						throw new GridFieldOccupiedException("Cannot move object because Grid field (x=" + newLocation.getX() + ",y=" + newLocation.getY() + ") is already occupied");
+						throw new GridFieldOccupiedException(
+								"Cannot move object because Grid field (x=" + newLocation.getX() + ",y=" + newLocation.getY() + ") is already occupied");
 					}
 				}
 

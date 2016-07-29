@@ -76,9 +76,9 @@
 							<consoleOutput>true</consoleOutput>
 							<failsOnError>true</failsOnError>
 						</configuration>
-						<!--<goals>
+						<goals>
 							<goal>check</goal>
-						</goals>-->
+						</goals>
 					</execution>
 				</executions>
 			</plugin>

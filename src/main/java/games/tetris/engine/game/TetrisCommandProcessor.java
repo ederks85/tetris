@@ -28,7 +28,7 @@ public class TetrisCommandProcessor { //TODO maybe make interface of this, more 
 		this.gridController = new TetrisGridController();
 	}
 
-	public Future<MultiLocationMoveCommand<TetrisObject>> performMoveAction(@NonNull final MultiLocationMoveCommand<TetrisObject> moveCommand) { //TODO In later version, switch Object to some sort of Tetris object
+	public Future<MultiLocationMoveCommand<TetrisObject>> performMoveAction(@NonNull final MultiLocationMoveCommand<TetrisObject> moveCommand) {
 		MoveTask moveTask = new MoveTask(this.gridController, moveCommand);
 		return this.processor.submit(moveTask);
 	}

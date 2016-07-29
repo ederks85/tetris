@@ -30,7 +30,10 @@ public class TetrisAIMoveTask extends TimerTask {
 
 	@Override
 	public void run() {
-		synchronized (this.tetrisAI.getTetrisGameState()) { // Arrange exclusive access to the game state so that it can not be modified by other components (threads) until the current task has been completed
+		// Arrange exclusive access to the game state so that it can not be modified by other components (threads)
+		// until the current task has been completed
+
+		synchronized (this.tetrisAI.getTetrisGameState()) {
 
 			final TetrisObject currentObject;
 			if (this.tetrisAI.getTetrisGameState().getCurrentTetrisObject() == null) {
@@ -51,7 +54,10 @@ public class TetrisAIMoveTask extends TimerTask {
 					newPositions = preserver.calculateNextPositions();
 					filteredNewPositions = filterInvalidPositions(newPositions);
 
-					final ThreadSafeMultiLocationMoveCommand<TetrisObject> moveCommand = new ThreadSafeMultiLocationMoveCommand<>(currentObject, this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions(), filteredNewPositions);
+					final ThreadSafeMultiLocationMoveCommand<TetrisObject> moveCommand = new ThreadSafeMultiLocationMoveCommand<>(
+							currentObject,
+							this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions(),
+							filteredNewPositions);
 					this.tetrisAI.scheduleTetrisMoveCommand(moveCommand);
 				}
 				while (!(newPositions.length == filteredNewPositions.length));
@@ -62,7 +68,10 @@ public class TetrisAIMoveTask extends TimerTask {
 					newPositions[i] = new Point2D(currentPositions[i].getX(), currentPositions[i].getY() +1);
 				}
 
-				final ThreadSafeMultiLocationMoveCommand<TetrisObject> moveCommand = new ThreadSafeMultiLocationMoveCommand<>(currentObject, this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions(), newPositions);
+				final ThreadSafeMultiLocationMoveCommand<TetrisObject> moveCommand = new ThreadSafeMultiLocationMoveCommand<>(
+						currentObject,
+						this.tetrisAI.getTetrisGameState().getCurrentTetrisObjectPositions(),
+						newPositions);
 				this.tetrisAI.scheduleTetrisMoveCommand(moveCommand);
 			}
 		}
