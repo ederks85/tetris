@@ -27,9 +27,4 @@ public interface MoveCommand<T, V> {
 	 * @return the location(s) after the move command has been performed via {@link #setNewLocation()} or returns the location(s) where the object has to be moved to.
 	 */
 	V getNewLocation();
-
-	/**
-	 * Set the new location(s) of the object. Can be null when the object does not or no longer exist at the new location(s).
-	 */
-	void setNewLocation(V newLocation);
 }

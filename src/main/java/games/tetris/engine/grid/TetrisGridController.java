@@ -1,5 +1,6 @@
 package games.tetris.engine.grid;
 
+import games.util.grid.Dimension;
 import lombok.NonNull;
 import org.apache.commons.lang3.Validate;
 
@@ -100,5 +101,9 @@ public class TetrisGridController implements GridController {
 
 	private boolean isFieldOccupied(@NonNull Point2D location) throws GridOutOfBoundsException {
 		return this.grid.getObjectAtPosition(location.getX(), location.getY());
+	}
+
+	public Dimension getGridDimensions() {
+		return this.grid.getGridDimensions();
 	}
 }

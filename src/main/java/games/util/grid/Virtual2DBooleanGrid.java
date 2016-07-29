@@ -11,11 +11,11 @@ import games.util.grid.GridOutOfBoundsException;
  */
 public class Virtual2DBooleanGrid extends AbstractVirtual2DGrid<Boolean> {
 
-	private final Boolean[][] grid;
+	private final boolean[][] grid;
 
 	public Virtual2DBooleanGrid(int width, int height) {
 		super(width, height);
-		this.grid = new Boolean[width][height];
+		this.grid = new boolean[width][height];
 	}
 
 	/**

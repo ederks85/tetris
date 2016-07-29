@@ -23,34 +23,15 @@ public class ThreadSafeMultiLocationMoveCommand<T> implements MultiLocationMoveC
 	private final AtomicReference<Point2D[]> newLocations;
 
 
-	public ThreadSafeMultiLocationMoveCommand(@NonNull final T object, final Point2D[] currentLocation, final Point2D[] newLocation) {
+	public ThreadSafeMultiLocationMoveCommand(@NonNull final T object, @NonNull final Point2D[] currentLocation, @NonNull final Point2D[] newLocation) {
 		this.object = object;
 		this.currentLocations = new AtomicReference<>(currentLocation);
 		this.newLocations = new AtomicReference<>(newLocation);
 	}
 
-	/**
-	 * Create a move command for an object where the new locations are yet unknown.
-	 */
-	public ThreadSafeMultiLocationMoveCommand(final T object, final Point2D[] currentLocation) {
-		this(object, currentLocation, null);
-	}
-
-	/**
-	 * Create a move command for an object where the current and new location are yet unknown.
-	 */
-	public ThreadSafeMultiLocationMoveCommand(final T object) {
-		this(object, null, null);
-	}
-
 	@Override
 	public Point2D[] getCurrentLocation() {
 		return this.currentLocations.get();
-	}
-
-	@Override
-	public void setNewLocation(Point2D[] newLocation) {
-		this.newLocations.set(newLocation);
 	}
 
 	@Override
