@@ -1,9 +1,6 @@
 package games.util.command.generic;
 
 import games.util.grid.Point2D;
-import lombok.Getter;
-import lombok.NonNull;
-
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -11,14 +8,17 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class ThreadSafeSingleLocationMoveCommand<T> implements SingleLocationMoveCommand<T> {
 
-    @Getter
     private final T object;
 
     private final AtomicReference<Point2D> currentLocation;
     private final AtomicReference<Point2D> newLocation;
 
 
-    public ThreadSafeSingleLocationMoveCommand(@NonNull final T object, final Point2D currentLocation, final Point2D newLocation) {
+    public ThreadSafeSingleLocationMoveCommand(final T object, final Point2D currentLocation, final Point2D newLocation) {
+        if (object == null) {
+            throw new IllegalArgumentException("Object is null");
+        }
+
         this.object = object;
         this.currentLocation = new AtomicReference<>(currentLocation);
         this.newLocation = new AtomicReference<>(newLocation);
@@ -39,5 +39,10 @@ public class ThreadSafeSingleLocationMoveCommand<T> implements SingleLocationMov
     @Override
     public Point2D getNewLocation() {
         return this.newLocation.get();
+    }
+
+    @Override
+    public T getObject() {
+        return this.object;
     }
 }

@@ -4,7 +4,6 @@ import games.tetris.engine.grid.TetrisGridController;
 import games.tetris.engine.object.TetrisObject;
 import games.util.command.generic.MultiLocationMoveCommand;
 import games.util.grid.GridController;
-import lombok.NonNull;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,9 +25,12 @@ public class TetrisCommandProcessor { //TODO maybe make interface of this, more 
 		this.gridController = new TetrisGridController();
 	}
 
-	public Future<MultiLocationMoveCommand<TetrisObject>> performMoveAction(@NonNull final MultiLocationMoveCommand<TetrisObject> moveCommand) {
-		MoveTask moveTask = new MoveTask(this.gridController, moveCommand);
-		return this.processor.submit(moveTask);
+	public Future<MultiLocationMoveCommand<TetrisObject>> performMoveAction(final MultiLocationMoveCommand<TetrisObject> moveCommand) {
+		if (moveCommand == null) {
+			throw new IllegalArgumentException("MultiLocationMoveCommand is null");
+		}
+
+		return this.processor.submit(new MoveTask(this.gridController, moveCommand));
 	}
 
 	/**

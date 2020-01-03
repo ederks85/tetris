@@ -1,7 +1,5 @@
 package games.tetris.engine.game;
 
-import lombok.NonNull;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -31,7 +29,11 @@ public class TetrisGame {
 	 * Subscribe a component to the Tetris game. After subscription, the component can access the game state and place commands.
 	 *
 	 */
-	public void subscribe(@NonNull final AbstractTetrisGameSubscriber tetrisGameSubscriber) {
+	public void subscribe(final AbstractTetrisGameSubscriber tetrisGameSubscriber) {
+		if (tetrisGameSubscriber == null) {
+			throw new IllegalArgumentException("TetrisGameSubscriber is null");
+		}
+
 		tetrisGameSubscriber.setCommandProcessor(this.tetrisCommandProcessor);
 		tetrisGameSubscriber.setTetrisGameState(this.tetrisGameState);
 
@@ -39,7 +41,11 @@ public class TetrisGame {
 		this.subscribers.add(tetrisGameSubscriber);
 	}
 
-	public void unsubscribe(@NonNull final AbstractTetrisGameSubscriber tetrisGameSubscriber) {
+	public void unsubscribe(final AbstractTetrisGameSubscriber tetrisGameSubscriber) {
+		if (tetrisGameSubscriber == null) {
+			throw new IllegalArgumentException("TetrisGameSubscriber is null");
+		}
+
 		tetrisGameSubscriber.setCommandProcessor(null);
 		tetrisGameSubscriber.setTetrisGameState(null);
 

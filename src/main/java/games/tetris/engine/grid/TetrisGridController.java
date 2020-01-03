@@ -8,7 +8,6 @@ import games.util.grid.GridFieldOccupiedException;
 import games.util.grid.GridOutOfBoundsException;
 import games.util.grid.Point2D;
 import games.util.grid.Virtual2DGrid;
-import lombok.NonNull;
 
 /**
  * Class that will perform thread-safe atomic operations on a {@code Virtual2DBooleanGrid}. A {@code Virtual2DBooleanGrid} will be used to define which grid fields are being occupied. 
@@ -101,7 +100,10 @@ public class TetrisGridController implements GridController {
 		}
 	}
 
-	private boolean isFieldOccupied(@NonNull Point2D location) throws GridOutOfBoundsException {
+	private boolean isFieldOccupied(Point2D location) throws GridOutOfBoundsException {
+		if (location == null) {
+			throw new IllegalArgumentException("Location is null");
+		}
 		return this.grid.getObjectAtPosition(location.getX(), location.getY());
 	}
 

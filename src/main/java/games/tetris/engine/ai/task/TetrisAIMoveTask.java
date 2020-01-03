@@ -7,7 +7,6 @@ import games.util.command.generic.ThreadSafeMultiLocationMoveCommand;
 import games.util.grid.Dimension;
 import games.util.grid.GridOutOfBoundsException;
 import games.util.grid.Point2D;
-import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,10 @@ public class TetrisAIMoveTask extends TimerTask {
 
 	private final TetrisAI tetrisAI;
 
-	public TetrisAIMoveTask(@NonNull TetrisAI tetrisAI) {
+	public TetrisAIMoveTask(TetrisAI tetrisAI) {
+		if (tetrisAI == null) {
+			throw new IllegalArgumentException("TetrisAI is null");
+		}
 		this.tetrisAI = tetrisAI;
 	}
 
@@ -76,7 +78,7 @@ public class TetrisAIMoveTask extends TimerTask {
 		}
 	}
 
-	private Point2D[] createCurrentObjectInitialPositions(@NonNull final TetrisObject currentObject) {
+	private Point2D[] createCurrentObjectInitialPositions(final TetrisObject currentObject) {
 		Point2D[] initialPositions = new Point2D[currentObject.getNumberOfPositions()];
 		int initialPositionCounter = 0;
 
@@ -102,7 +104,8 @@ public class TetrisAIMoveTask extends TimerTask {
 		return initialPositions;
 	}
 
-	private static Point2D[] filterInvalidPositions(@NonNull final Point2D[] positions) {
+	private static Point2D[] filterInvalidPositions(final Point2D[] positions) {
+
 		List<Point2D> temp = new ArrayList<>();
 
 		for (Point2D position : positions) {
@@ -119,7 +122,7 @@ public class TetrisAIMoveTask extends TimerTask {
 
 		private Point2D[] preservedPositions;
 
-		ObjectPositionPreserver(@NonNull final Point2D[] preservedPositions) {
+		ObjectPositionPreserver(final Point2D[] preservedPositions) {
 			this.preservedPositions = preservedPositions;
 		}
 

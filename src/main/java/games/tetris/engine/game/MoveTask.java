@@ -3,7 +3,6 @@ package games.tetris.engine.game;
 import games.tetris.engine.object.TetrisObject;
 import games.util.command.generic.MultiLocationMoveCommand;
 import games.util.grid.GridController;
-import lombok.NonNull;
 
 import java.util.concurrent.Callable;
 
@@ -24,7 +23,14 @@ class MoveTask implements Callable<MultiLocationMoveCommand<TetrisObject>> {
 	 * @param gridController	the grid controller that will perform the 
 	 * @param moveCommand		the details of the move
 	 */
-	MoveTask(@NonNull GridController gridController, @NonNull MultiLocationMoveCommand<TetrisObject> moveCommand) {
+	MoveTask(GridController gridController, MultiLocationMoveCommand<TetrisObject> moveCommand) {
+		if (gridController == null) {
+			throw new IllegalArgumentException("GridController is null");
+		}
+		if (moveCommand == null) {
+			throw new IllegalArgumentException("MultiLocationMoveCommand is null");
+		}
+
 		this.gridController = gridController;
 		this.moveCommand = moveCommand;
 	}

@@ -1,7 +1,6 @@
 package games.tetris.engine.object;
 
 import games.util.grid.Point2D;
-import lombok.Getter;
 
 import java.util.Arrays;
 
@@ -13,10 +12,7 @@ import java.util.Arrays;
  */
 public class TetrisObjectShape {
 
-	@Getter()
 	private final int width;
-
-	@Getter
 	private final int heigth;
 
 	private final Point2D[] occupiedLocations;
@@ -57,5 +53,13 @@ public class TetrisObjectShape {
 	 */
 	public Point2D[] getOccupiedLocations() {
 		return Arrays.copyOf(this.occupiedLocations, this.occupiedLocations.length);
+	}
+
+	public int getWidth() {
+		return this.width;
+	}
+
+	public int getHeigth() {
+		return this.heigth;
 	}
 }

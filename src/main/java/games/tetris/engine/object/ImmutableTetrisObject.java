@@ -4,7 +4,6 @@ import games.util.grid.Dimension;
 import games.util.grid.GridOutOfBoundsException;
 import games.util.grid.Point2D;
 import games.util.grid.Virtual2DBooleanGrid;
-import lombok.Getter;
 
 /**
  * Tetris object whose layout/shape is defined by a boolean grid where {@link Boolean#TRUE} defines the occupied locations that mark the shape. 
@@ -25,7 +24,6 @@ import lombok.Getter;
  */
 public class ImmutableTetrisObject extends Virtual2DBooleanGrid implements TetrisObject {
 
-	@Getter
 	private final int numberOfPositions;
 
 	public ImmutableTetrisObject(int width, int height, Point2D[] occupiedLocations) throws GridOutOfBoundsException {
@@ -50,5 +48,10 @@ public class ImmutableTetrisObject extends Virtual2DBooleanGrid implements Tetri
 	@Override
 	public Boolean isPositionOccupied(int x, int y) throws GridOutOfBoundsException {
 		return this.getObjectAtPosition(x, y);
+	}
+
+	@Override
+	public int getNumberOfPositions() {
+		return this.numberOfPositions;
 	}
 }

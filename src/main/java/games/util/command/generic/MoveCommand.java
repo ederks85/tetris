@@ -5,8 +5,8 @@ package games.util.command.generic;
  * 
  * @author edwin
  *
- * @param T the type of object that is to be moved
- * @param V the type of object that contains the location of the object, or locations of the object when the object is a composite object.
+ * @param <T> the type of object that is to be moved
+ * @param <V> the type of object that contains the location of the object, or locations of the object when the object is a composite object.
  * 
  * @see SingleLocationMoveCommand
  * @see MultiLocationMoveCommand
@@ -14,7 +14,7 @@ package games.util.command.generic;
 public interface MoveCommand<T, V> {
 
 	/**
-	 * @return the object where a move command will be performed. Never null.
+	 * @return the object where a move command will be performed for. Never null.
 	 */
 	T getObject();
 
@@ -24,7 +24,7 @@ public interface MoveCommand<T, V> {
 	V getCurrentLocation();
 
 	/**
-	 * @return the location(s) after the move command has been performed via {@link #setNewLocation()} or returns the location(s) where the object has to be moved to.
+	 * @return the location(s) after the move command has been performed.
 	 */
 	V getNewLocation();
 }
