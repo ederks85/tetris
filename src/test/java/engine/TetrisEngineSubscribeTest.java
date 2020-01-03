@@ -2,7 +2,7 @@ package engine;
 
 import games.tetris.engine.ai.TetrisAI;
 import games.tetris.engine.game.TetrisGame;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +20,7 @@ public class TetrisEngineSubscribeTest {
 
 	private TetrisAI ai;
 
-	@BeforeAll
+	@BeforeEach
 	public void init() {
 		g = new TetrisGame();
 		ai = new TetrisAI();
