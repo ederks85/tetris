@@ -1,13 +1,14 @@
 package engine;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import games.tetris.engine.ai.TetrisAI;
 import games.tetris.engine.game.TetrisGame;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author edwin
@@ -19,7 +20,7 @@ public class TetrisEngineSubscribeTest {
 
 	private TetrisAI ai;
 
-	@Before
+	@BeforeAll
 	public void init() {
 		g = new TetrisGame();
 		ai = new TetrisAI();
@@ -36,9 +37,9 @@ public class TetrisEngineSubscribeTest {
 		assertEquals(1, g.getSubscribers().size());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void subscribeNullAI() {
-		g.subscribe(null);
+		assertThrows(IllegalArgumentException.class, () -> g.subscribe(null));
 	}
 
 	@Test
