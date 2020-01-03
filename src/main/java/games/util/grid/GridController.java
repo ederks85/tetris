@@ -1,6 +1,7 @@
 package games.util.grid;
 
-import games.util.command.generic.*;
+import games.util.command.generic.MultiLocationMoveCommand;
+import games.util.command.generic.SingleLocationMoveCommand;
 
 /**
  * Interface that defines the atomic operations that can be performed on a grid.

@@ -1,9 +1,9 @@
 package games.tetris.engine.game;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 import games.tetris.engine.object.TetrisObject;
 import games.util.grid.Point2D;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Default implementation of {@code TetrisGameState} that can safely be shared between components.

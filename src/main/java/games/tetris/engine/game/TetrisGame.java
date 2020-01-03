@@ -1,11 +1,10 @@
 package games.tetris.engine.game;
 
+import lombok.NonNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-
-import lombok.NonNull;
-import org.apache.commons.lang3.Validate;
 
 /**
  * Entry point for Tetris components that will schedule commands on the engine and get notified about the execution.

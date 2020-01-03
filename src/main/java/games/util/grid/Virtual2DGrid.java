@@ -1,7 +1,5 @@
 package games.util.grid;
 
-import games.util.grid.Dimension;
-
 /**
  * Interface for classes that represents a 2D grid in memory.
  *

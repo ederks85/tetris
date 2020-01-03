@@ -1,6 +1,5 @@
 package games.util.grid;
 
-import lombok.AllArgsConstructor;
 import lombok.Value;
 
 /**

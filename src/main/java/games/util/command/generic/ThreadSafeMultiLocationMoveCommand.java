@@ -4,7 +4,6 @@ package games.util.command.generic;
 import games.util.grid.Point2D;
 import lombok.Getter;
 import lombok.NonNull;
-import org.apache.commons.lang3.Validate;
 
 import java.util.concurrent.atomic.AtomicReference;
 

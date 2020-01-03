@@ -1,8 +1,5 @@
 package games.util.grid;
 
-import games.util.grid.AbstractVirtual2DGrid;
-import games.util.grid.GridOutOfBoundsException;
-
 /**
  * A 2d grid that uses {@link Boolean#TRUE} to mark filled grid fields and {@link Boolean#FALSE} to mark empty grid fields.
  * 

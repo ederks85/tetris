@@ -1,11 +1,10 @@
 package games.tetris.engine.object;
 
-import java.util.Arrays;
-
+import games.util.grid.Point2D;
 import lombok.Getter;
 import org.apache.commons.lang3.Validate;
 
-import games.util.grid.Point2D;
+import java.util.Arrays;
 
 /**
  * Immutable object that contains the data for determining various {@code TetrisObject} shapes.

@@ -1,7 +1,5 @@
 package games.util.grid;
 
-import games.util.grid.Dimension;
-
 /**
  * Basic implementation for {@code Virtual2DGrid}.
  * 
