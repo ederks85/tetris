@@ -9,7 +9,6 @@ import games.util.grid.GridOutOfBoundsException;
 import games.util.grid.Point2D;
 import games.util.grid.Virtual2DGrid;
 import lombok.NonNull;
-import org.apache.commons.lang3.Validate;
 
 /**
  * Class that will perform thread-safe atomic operations on a {@code Virtual2DBooleanGrid}. A {@code Virtual2DBooleanGrid} will be used to define which grid fields are being occupied. 
@@ -31,8 +30,10 @@ public class TetrisGridController implements GridController {
 	 * is in synch with the object where the command is being performed for.
 	 */
 	@Override
-	public synchronized <T> void moveObject(@NonNull SingleLocationMoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
-		Validate.notNull(moveCommand.getNewLocation(), "Move Command's new location is null");
+	public synchronized <T> void moveObject(SingleLocationMoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
+		if (moveCommand.getNewLocation() == null || moveCommand.getNewLocation() == null) {
+			throw new IllegalArgumentException("Move Command or it's new location is null");
+		}
 
 		if (isFieldOccupied(moveCommand.getNewLocation())) {
 			throw new GridFieldOccupiedException("Grid field (x=" + moveCommand.getNewLocation().getX() + ",y=" + moveCommand.getNewLocation().getY() + ") is already occupied");
@@ -53,8 +54,10 @@ public class TetrisGridController implements GridController {
 	 * @see #moveObject(SingleLocationMoveCommand)
 	 */
 	@Override
-	public synchronized <T> void moveObject(@NonNull MultiLocationMoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
-		Validate.notNull(moveCommand.getNewLocation(), "Move Command's new locations list is null");
+	public synchronized <T> void moveObject(MultiLocationMoveCommand<T> moveCommand) throws GridOutOfBoundsException, GridFieldOccupiedException {
+		if (moveCommand.getNewLocation() == null || moveCommand.getNewLocation() == null) {
+			throw new IllegalArgumentException("Move Command or it's new locations are null");
+		}
 
 		if (moveCommand.getCurrentLocation() != null) {
 			// The object has positions that need to be moved on the grid. For take the object from the grid by clearing it's current location

@@ -2,7 +2,6 @@ package games.tetris.engine.object;
 
 import games.util.grid.Point2D;
 import lombok.Getter;
-import org.apache.commons.lang3.Validate;
 
 import java.util.Arrays;
 
@@ -28,7 +27,9 @@ public class TetrisObjectShape {
 	 * @param occupiedLocations
 	 */
 	public TetrisObjectShape(Point2D[] occupiedLocations) {
-		Validate.notEmpty(occupiedLocations, "No occupied locations have been provided");
+		if (occupiedLocations == null) {
+			throw new IllegalArgumentException("No occupied locations have been provided");
+		}
 
 		int tempWidht = 0;
 		int tempHeight = 0;
