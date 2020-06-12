@@ -1,4 +1,4 @@
-package engine;
+package integration;
 
 import games.tetris.engine.game.TetrisGame;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author edwin
  *
  */
-public class BasicTetrisEngineTest {
+public class BasicTetrisEngineIT {
 
 	@Test
 	public void tetrisEngineRunTest() {

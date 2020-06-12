@@ -1,4 +1,4 @@
-package engine;
+package integration;
 
 import games.tetris.engine.grid.TetrisGridController;
 import games.tetris.engine.object.TetrisObject;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Created by Edwin on 29-7-2016.
  */
-public class TetrisGridControllerTest {
+public class TetrisGridControllerIT {
 
     @Test
     public void test_move_single_location_tetris_object_on_grid_until_reaching_bottom_border() throws GridFieldOccupiedException, GridOutOfBoundsException {

@@ -1,4 +1,4 @@
-package engine;
+package integration;
 
 import games.tetris.engine.ai.TetrisAI;
 import games.tetris.engine.game.TetrisGame;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author edwin
  *
  */
-public class TetrisEngineSubscribeTest {
+public class TetrisEngineSubscribeIT {
 
 	private TetrisGame g;
 
