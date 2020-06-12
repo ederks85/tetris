@@ -1,4 +1,4 @@
-package games.tetris.util.grid;
+package games.tetris.generic.grid;
 
 /**
  * Basic implementation for {@code Virtual2DGrid}.

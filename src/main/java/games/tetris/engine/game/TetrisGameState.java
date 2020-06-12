@@ -1,7 +1,7 @@
 package games.tetris.engine.game;
 
 import games.tetris.engine.object.TetrisObject;
-import games.tetris.util.grid.Point2D;
+import games.tetris.generic.grid.Point2D;
 
 /**
  * Container object that holds sharable, possibly persistent state of the Tetris game.

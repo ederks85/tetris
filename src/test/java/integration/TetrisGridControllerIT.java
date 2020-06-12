@@ -3,12 +3,12 @@ package integration;
 import games.tetris.engine.grid.TetrisGridController;
 import games.tetris.engine.object.TetrisObject;
 import games.tetris.engine.object.TetrisObjectFactory;
-import games.tetris.util.command.generic.SingleLocationMoveCommand;
-import games.tetris.util.command.generic.ThreadSafeSingleLocationMoveCommand;
-import games.tetris.util.grid.Dimension;
-import games.tetris.util.grid.GridFieldOccupiedException;
-import games.tetris.util.grid.GridOutOfBoundsException;
-import games.tetris.util.grid.Point2D;
+import games.tetris.generic.command.SingleLocationMoveCommand;
+import games.tetris.generic.command.ThreadSafeSingleLocationMoveCommand;
+import games.tetris.generic.grid.Dimension;
+import games.tetris.generic.grid.GridFieldOccupiedException;
+import games.tetris.generic.grid.GridOutOfBoundsException;
+import games.tetris.generic.grid.Point2D;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

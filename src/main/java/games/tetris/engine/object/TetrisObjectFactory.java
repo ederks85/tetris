@@ -1,7 +1,7 @@
 package games.tetris.engine.object;
 
-import games.tetris.util.grid.GridOutOfBoundsException;
-import games.tetris.util.grid.Point2D;
+import games.tetris.generic.grid.GridOutOfBoundsException;
+import games.tetris.generic.grid.Point2D;
 
 /**
  * Factory class for retrieving the available Tetris objects.

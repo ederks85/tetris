@@ -1,6 +1,6 @@
-package games.tetris.util.command.generic;
+package games.tetris.generic.command;
 
-import games.tetris.util.grid.Point2D;
+import games.tetris.generic.grid.Point2D;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**

@@ -3,9 +3,9 @@ package games.tetris.engine.ai;
 import games.tetris.engine.ai.task.TetrisAIMoveTask;
 import games.tetris.engine.game.AbstractTetrisGameSubscriber;
 import games.tetris.engine.object.TetrisObject;
-import games.tetris.util.command.generic.MultiLocationMoveCommand;
-import games.tetris.util.grid.GridFieldOccupiedException;
-import games.tetris.util.grid.GridOutOfBoundsException;
+import games.tetris.generic.command.MultiLocationMoveCommand;
+import games.tetris.generic.grid.GridFieldOccupiedException;
+import games.tetris.generic.grid.GridOutOfBoundsException;
 
 import java.util.Timer;
 import java.util.concurrent.ExecutionException;

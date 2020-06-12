@@ -1,4 +1,4 @@
-package games.tetris.util.grid;
+package games.tetris.generic.grid;
 
 /**
  * Exception that can be thrown when something is to be done outside the boundaries of a grid.

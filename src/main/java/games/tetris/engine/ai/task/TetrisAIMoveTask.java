@@ -3,10 +3,10 @@ package games.tetris.engine.ai.task;
 import games.tetris.engine.ai.TetrisAI;
 import games.tetris.engine.object.TetrisObject;
 import games.tetris.engine.object.TetrisObjectFactory;
-import games.tetris.util.command.generic.ThreadSafeMultiLocationMoveCommand;
-import games.tetris.util.grid.Dimension;
-import games.tetris.util.grid.GridOutOfBoundsException;
-import games.tetris.util.grid.Point2D;
+import games.tetris.generic.command.ThreadSafeMultiLocationMoveCommand;
+import games.tetris.generic.grid.Dimension;
+import games.tetris.generic.grid.GridOutOfBoundsException;
+import games.tetris.generic.grid.Point2D;
 
 import java.util.ArrayList;
 import java.util.List;
