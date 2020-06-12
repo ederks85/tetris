@@ -1,4 +1,4 @@
-package games.util.grid;
+package games.tetris.util.grid;
 
 import java.util.Objects;
 

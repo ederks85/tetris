@@ -1,4 +1,4 @@
-package games.util.grid;
+package games.tetris.util.grid;
 
 /**
  * Exception that can be thrown when an object is tried to being placed at a location in a grid that is already occupied.

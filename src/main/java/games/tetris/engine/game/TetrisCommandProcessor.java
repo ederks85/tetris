@@ -2,8 +2,8 @@ package games.tetris.engine.game;
 
 import games.tetris.engine.grid.TetrisGridController;
 import games.tetris.engine.object.TetrisObject;
-import games.util.command.generic.MultiLocationMoveCommand;
-import games.util.grid.GridController;
+import games.tetris.util.command.generic.MultiLocationMoveCommand;
+import games.tetris.util.grid.GridController;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

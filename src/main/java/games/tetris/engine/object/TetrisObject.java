@@ -1,7 +1,7 @@
 package games.tetris.engine.object;
 
-import games.util.grid.Dimension;
-import games.util.grid.GridOutOfBoundsException;
+import games.tetris.util.grid.Dimension;
+import games.tetris.util.grid.GridOutOfBoundsException;
 
 
 /**

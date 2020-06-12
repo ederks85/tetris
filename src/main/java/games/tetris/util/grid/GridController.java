@@ -1,7 +1,7 @@
-package games.util.grid;
+package games.tetris.util.grid;
 
-import games.util.command.generic.MultiLocationMoveCommand;
-import games.util.command.generic.SingleLocationMoveCommand;
+import games.tetris.util.command.generic.MultiLocationMoveCommand;
+import games.tetris.util.command.generic.SingleLocationMoveCommand;
 
 /**
  * Interface that defines the atomic operations that can be performed on a grid.

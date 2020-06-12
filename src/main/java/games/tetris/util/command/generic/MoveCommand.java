@@ -1,4 +1,4 @@
-package games.util.command.generic;
+package games.tetris.util.command.generic;
 
 /**
  * Interface that defines a command for moving a specific object from one position to another.

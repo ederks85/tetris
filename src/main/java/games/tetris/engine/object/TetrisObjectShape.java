@@ -1,6 +1,6 @@
 package games.tetris.engine.object;
 
-import games.util.grid.Point2D;
+import games.tetris.util.grid.Point2D;
 
 import java.util.Arrays;
 

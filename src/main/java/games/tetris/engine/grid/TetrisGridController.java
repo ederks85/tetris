@@ -1,13 +1,13 @@
 package games.tetris.engine.grid;
 
-import games.util.command.generic.MultiLocationMoveCommand;
-import games.util.command.generic.SingleLocationMoveCommand;
-import games.util.grid.Dimension;
-import games.util.grid.GridController;
-import games.util.grid.GridFieldOccupiedException;
-import games.util.grid.GridOutOfBoundsException;
-import games.util.grid.Point2D;
-import games.util.grid.Virtual2DGrid;
+import games.tetris.util.command.generic.MultiLocationMoveCommand;
+import games.tetris.util.command.generic.SingleLocationMoveCommand;
+import games.tetris.util.grid.Dimension;
+import games.tetris.util.grid.GridController;
+import games.tetris.util.grid.GridFieldOccupiedException;
+import games.tetris.util.grid.GridOutOfBoundsException;
+import games.tetris.util.grid.Point2D;
+import games.tetris.util.grid.Virtual2DGrid;
 
 /**
  * Class that will perform thread-safe atomic operations on a {@code Virtual2DBooleanGrid}. A {@code Virtual2DBooleanGrid} will be used to define which grid fields are being occupied. 

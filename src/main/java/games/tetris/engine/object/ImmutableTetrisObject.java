@@ -1,9 +1,9 @@
 package games.tetris.engine.object;
 
-import games.util.grid.Dimension;
-import games.util.grid.GridOutOfBoundsException;
-import games.util.grid.Point2D;
-import games.util.grid.Virtual2DBooleanGrid;
+import games.tetris.util.grid.Dimension;
+import games.tetris.util.grid.GridOutOfBoundsException;
+import games.tetris.util.grid.Point2D;
+import games.tetris.util.grid.Virtual2DBooleanGrid;
 
 /**
  * Tetris object whose layout/shape is defined by a boolean grid where {@link Boolean#TRUE} defines the occupied locations that mark the shape. 

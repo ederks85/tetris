@@ -1,7 +1,7 @@
 package games.tetris.engine.grid;
 
-import games.util.grid.GridOutOfBoundsException;
-import games.util.grid.Virtual2DBooleanGrid;
+import games.tetris.util.grid.GridOutOfBoundsException;
+import games.tetris.util.grid.Virtual2DBooleanGrid;
 
 /**
  * A 2d grid that uses {@link Boolean#TRUE} to mark filled grid fields and {@link Boolean#FALSE} to mark empty grid fields.

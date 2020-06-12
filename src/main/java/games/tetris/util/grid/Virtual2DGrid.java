@@ -1,4 +1,4 @@
-package games.util.grid;
+package games.tetris.util.grid;
 
 /**
  * Interface for classes that represents a 2D grid in memory.
